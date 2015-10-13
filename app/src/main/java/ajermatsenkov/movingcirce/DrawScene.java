@@ -27,15 +27,15 @@ public class DrawScene extends View {
     private int dy;
     private final int FRAME_RATE = 60;
 
-    private int scene_width;
-    private int scene_height;
+    private int sceneWidth;
+    private int sceneHeight;
 
     private Handler h;
 
-    public DrawScene(Context context, int start_x, int start_y, int dx, int dy) {
+    public DrawScene(Context context, int startX, int startY, int dx, int dy) {
         super(context);
-        x = start_x;
-        y = start_y;
+        x = startX;
+        y = startY;
 
         this.dx = dx;
         this.dy = dy;
@@ -62,19 +62,19 @@ public class DrawScene extends View {
         super.onDraw(sceneCanvas);
 
         sceneCanvas.drawPaint(canvasPaint);
-        scene_width = this.getWidth();
-        scene_height = this.getHeight();
+        sceneWidth = this.getWidth();
+        sceneHeight = this.getHeight();
 
         sceneCanvas.drawCircle(x, y, circleRadius, circlePaint);
 
         x += dx;
         y += dy;
 
-        if ((x > scene_width - circleRadius) || (x < circleRadius)) {
+        if ((x > sceneWidth - circleRadius) || (x < circleRadius)) {
             dx = dx * -1;
         }
 
-        if ((y > scene_height - circleRadius) || (y < circleRadius)) {
+        if ((y > sceneHeight - circleRadius) || (y < circleRadius)) {
             dy = dy * -1;
         }
 
