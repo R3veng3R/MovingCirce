@@ -22,12 +22,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         SharedPreferences storedData = getSharedPreferences(PREFS_NAME, 0);
-        start_x = storedData.getInt("currentRate", 50);
-        start_y = storedData.getInt("highestRate", 50);
+        start_x = storedData.getInt("x", 50);
+        start_y = storedData.getInt("y", 50);
+        int dx = storedData.getInt("dx", 5);
+        int dy = storedData.getInt("dy", 5);
 
-        scene = new DrawScene(this, start_x, start_y);
+        scene = new DrawScene(this, start_x, start_y, dx, dy);
         setContentView(scene);
     }
 
@@ -40,9 +41,10 @@ public class MainActivity extends Activity {
     protected void saveData() {
         SharedPreferences storedData = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor storedDataEditor = storedData.edit();
-        storedDataEditor.putInt("currentRate", scene.x);
-        storedDataEditor.putInt("highestRate", scene.y);
+        storedDataEditor.putInt("x", scene.getCircleXY().x);
+        storedDataEditor.putInt("y", scene.getCircleXY().y);
+        storedDataEditor.putInt("dx", scene.getCircleDxDy().x);
+        storedDataEditor.putInt("dy", scene.getCircleDxDy().y);
         storedDataEditor.commit();
-
     }
 }

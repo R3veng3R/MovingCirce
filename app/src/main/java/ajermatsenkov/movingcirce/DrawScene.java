@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.os.Handler;
 import android.view.View;
 
@@ -22,19 +23,22 @@ public class DrawScene extends View {
     public int y;
     private int circleRadius = 10;
 
-    private int dx = 10;
-    private int dy = 10;
-    private final int FRAME_RATE = 10;
+    private int dx;
+    private int dy;
+    private final int FRAME_RATE = 60;
 
     private int scene_width;
     private int scene_height;
 
     private Handler h;
 
-    public DrawScene(Context context, int start_x, int start_y) {
+    public DrawScene(Context context, int start_x, int start_y, int dx, int dy) {
         super(context);
         x = start_x;
         y = start_y;
+
+        this.dx = dx;
+        this.dy = dy;
 
         canvasPaint = new Paint();
         canvasPaint.setStyle(Paint.Style.FILL);
@@ -77,4 +81,13 @@ public class DrawScene extends View {
         h.postDelayed(r, FRAME_RATE);
     }
 
+    public Point getCircleXY() {
+        Point p = new Point(this.x, this.y);
+        return p;
+    }
+
+    public Point getCircleDxDy() {
+        Point p = new Point(this.dx, this.dy);
+        return p;
+    }
 }
